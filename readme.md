@@ -15,6 +15,8 @@
 - Rust (>=1.60.0)  
     - `wasm-pack` (Rust コードを WebAssembly にビルドするためのツール)  
 
+(Linuxの場合は、このリポジトリで$`npm run install-rust`を実行すればRustとwasm-packがインストールできます)  
+
 ### 開発
 
 1. このリポジトリをクローンします  

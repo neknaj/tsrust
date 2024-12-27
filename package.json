@@ -10,7 +10,7 @@
     "build": "npm install && npm run build-rust && npm run copy-rust_dts && npm run build-ts && npm run copy-rust && npm run copy-html",
     "server": "http-server ./dist",
     "clean": "npx rimraf target pkg node_modules",
-    "install-rust": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && source $HOME/.cargo/env && curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh"
+    "install-rust": "bash -c \"curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && source $HOME/.cargo/env && curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh\""
   },
   "devDependencies": {
     "typescript": "^5.7.2",

@@ -4,7 +4,16 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-wasm-bindgen = "0.2"
+wasm-bindgen = { version = "0.2", optional = true }
+
+[[bin]]
+name = "tsrust_bin"
+path = "src/main.rs"
 
 [lib]
+name = "tsrust_lib"
 crate-type = ["cdylib"]
+
+[features]
+web = ["wasm-bindgen"]
+native = []

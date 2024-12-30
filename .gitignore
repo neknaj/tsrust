@@ -1,7 +1,7 @@
 # rust
 /target
 /pkg
-/src/tsrust.d.ts
+/src/tsrust_lib.d.ts
 
 # ts
 /node_modules

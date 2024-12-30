@@ -1,4 +1,4 @@
-import init, { greet } from './tsrust.js';
+import init, { greet } from './tsrust_lib.js';
 
 async function run() {
   await init(); // Wasmモジュールの初期化
@@ -8,4 +8,4 @@ async function run() {
 run();
 
 
-console.log("hello world")
+console.log("hello world from TypeScript!")

@@ -15,7 +15,8 @@
 ## 実行方法
 ### ブラウザ
 ```bash
-npm run build
+npm install
+node build.js
 ```
 を実行後、ローカルサーバーを建てて  
 `/dist/index.html`をブラウザで開く  

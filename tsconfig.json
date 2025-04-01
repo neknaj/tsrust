@@ -12,5 +12,5 @@
             "*": ["pkg/*"]
         }
     },
-    "include": ["src/*"]
+    "include": ["src/*", "src/web/tsrust_lib.d.ts"]
 }

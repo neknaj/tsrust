@@ -3,16 +3,20 @@ name = "tsrust"
 version = "0.1.0"
 edition = "2021"
 
+[package.metadata]
+path = "src/rust/main.rs"
+
 [dependencies]
 wasm-bindgen = { version = "0.2", optional = true }
 
 [[bin]]
 name = "tsrust_bin"
-path = "src/main.rs"
+path = "src/rust/main.rs"
 
 [lib]
 name = "tsrust_lib"
 crate-type = ["cdylib"]
+path = "src/rust/lib.rs"
 
 [features]
 web = ["wasm-bindgen"]

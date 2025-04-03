@@ -9,6 +9,8 @@
 /src/web/layout.js
 /src/web/tsrust_lib.d.ts
 /src/web/tsrust_lib.js
+/src/web/model.ts
+/src/web/snippets
 
 # dist
 /dist

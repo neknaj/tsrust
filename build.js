@@ -33,14 +33,29 @@ function buildTS() {
     }).catch(() => process.exit(1));
 }
 
-async function buildRust() {
+async function buildRust(args) {
     try {
         // wasm-packコマンドを実行
-        const { stdout, stderr } = await execPromise('wasm-pack build --target web --no-default-features --features web');
+        const { stdout, stderr } = await execPromise('cargo test --features web');
         process.stdout.write(stdout);
         if (stderr) {
             process.stderr.write(stderr);
         }
+    } catch (error) {
+        // エラーオブジェクトから終了コードを取得
+        process.stderr.write(error.message+"\n");
+        process.stderr.write(error.statusCode+"\n");
+        throw error.statusCode;
+    }
+    try {
+        let flag = args.includes("--release")? "--release" : "--debug";
+        // wasm-packコマンドを実行
+        const { stdout, stderr } = await execPromise('wasm-pack build '+flag+' --target web --no-default-features --features web');
+        process.stdout.write(stdout);
+        if (stderr) {
+            process.stderr.write(stderr);
+        }
+        console.log(flag)
         console.log('Wasm build complete!');
         return true;
     } catch (error) {
@@ -60,6 +75,20 @@ function copyFiles(files) {
         return fs.promises.copyFile(sourcePath, destinationPath);
     });
     return Promise.all(copyPromises);
+}
+
+async function copyDirectory(source, destination) {
+    await fs.promises.mkdir(destination, { recursive: true });
+    const entries = await fs.promises.readdir(source, { withFileTypes: true });
+    for (let entry of entries) {
+        const srcPath = path.join(source, entry.name);
+        const destPath = path.join(destination, entry.name);
+        if (entry.isDirectory()) {
+            await copyDirectory(srcPath, destPath);
+        } else {
+            await fs.promises.copyFile(srcPath, destPath);
+        }
+    }
 }
 
 async function getFile(savePath,url) {
@@ -91,7 +120,7 @@ async function main() {
     const args = process.argv.slice(2);
     makedir();
     if (!args.includes("-tsonly")) {
-        await buildRust();
+        await buildRust(args);
     }
     await copyFiles([
         [
@@ -107,6 +136,7 @@ async function main() {
             "./dist/tsrust_lib_bg.wasm"
         ],
     ]);
+    await copyDirectory('./pkg/snippets', './src/web/snippets');
     await getFile('./src/web/cdom.ts','https://raw.githubusercontent.com/neknaj/cDom/50a65673454c7286830f0d131f0512ddf46a3844/cdom_module.ts');
     if (await getFile('./src/web/layout.js','https://raw.githubusercontent.com/neknaj/webSplitLayout/c7e1c52cb37a8bfbf9968b825c05a2e9924ca88e/type1/layout.js')) {
         fs.readFile('./src/web/layout.js', 'utf8', (err, data) => {

@@ -5,9 +5,10 @@
 
 # ts
 /node_modules
+/src/web/cdom.ts
 /src/web/layout.js
 /src/web/tsrust_lib.d.ts
-/src/web/tsrust_lib.ts
+/src/web/tsrust_lib.js
 
 # dist
 /dist

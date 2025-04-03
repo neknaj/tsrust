@@ -27,8 +27,12 @@ pub fn content() {
         content: "World".to_string(),
     };
 
+    // Debugによる表示
     console_log!(format!("content: {:?}", content));
 
     // serdeによるJSON変換
     console_log!(format!("content: {:?}", serde_json::to_string(&content).unwrap()));
+
+    // javascriptのconsole.logと同じような表示
+    console_log!(&content);
 }

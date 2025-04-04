@@ -11,6 +11,7 @@
 /src/web/tsrust_lib.js
 /src/web/model.ts
 /src/web/snippets
+/src/web/api.js
 
 # dist
 /dist
